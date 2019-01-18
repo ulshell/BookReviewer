@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+login
+{% endblock %}
+
+{% block body %}
+{% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-success border text-center" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+<div id="pad">
+    <form class="form-signin" action="/login" method="post">
+		<div id="inputFields" style="background-image: url('static/pexels-photo-1060417.jpg')">
+            <label for="inputUsername" id="inputUsername" style="font-size: 30px; color: #ffffff; font-family:'Cuprum';">Account Login</label>
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="username"  id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+            </br>
+            <button class="btn btn-outline-primary" id="submit" type="submit" style="color: #ffffff; font-family:'Cuprum';">Sign in</button>
+		</div>
+    </form>
+<div>
+{% endblock %}

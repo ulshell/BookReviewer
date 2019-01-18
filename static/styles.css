@@ -1,0 +1,241 @@
+#inputUsername
+{
+    width: 320px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#inputPassword
+{
+    width: 320px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+#inputmidPassword
+{
+    width: 320px;
+    border-radius: 0px;
+}
+#submit
+{
+    width: 320px;
+}
+#inputFields
+{
+    align-items: center;
+    justify-content: space-around;
+    padding: 5%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    width: 50%;
+    height: 50%;
+    background-color: #ffffff;
+}
+#pad{
+    padding-left: 30%;
+    padding-top: 8%;
+}
+#detail
+{
+    width: 320px;
+}
+.imgcontainer
+{
+    padding-top: 100px;
+}
+.avatar
+{
+    height: 150px;
+    border-left: 10px;
+    padding-left: 20px;
+}
+#welc_msg
+{
+    text-align: left;
+}
+#Select
+{
+    width: 100px;
+    
+}
+#error
+{
+    font-size : 25px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0);
+    font-family:'Cuprum';
+}
+#text
+{
+    width: 40%;
+    height: 10%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0);
+}
+.checked {
+    color: orange;
+  }
+.container
+{
+    width: 100%;
+    height: 100%;
+}
+.cont
+{
+    width: 100%;
+    height: 100%;
+}
+body{
+    min-width:1000px;        /* Suppose you want minimum width of 1000px */
+    min-height: 600px;
+    width: auto !important;
+    height: 600px;
+    width:1000px;
+               /* As IE6 ignores !important it will set width as 1000px; */
+ }
+#box
+{
+    padding-top: 20%;
+    padding-left: 33%;
+    width: 320px;
+    height: 300px;
+    text-align: center;
+}
+#box1
+{
+    padding-top: 15%;
+    padding-right: 15%;
+    width: 320px;
+    height: 300px;
+    text-align: center;
+
+}
+.index
+{
+    padding-top: 15%;
+    padding-right: 15%;
+    width: 320px;
+    height: 300px;
+    text-align: center;
+}
+table{
+    box-shadow: 5px 5px 10px 10px #ffffff;
+    font-family:'Cuprum';
+}
+#exampleFormControlSelect1
+{
+    width: 25%;
+}
+#find
+{
+    width: 25%;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0);
+    transition: 0.3s;
+    width: 40%;
+}
+  
+  .card:hover {
+    box-shadow: 0 10px 20px 0 rgba(0,0,0);
+  }
+  
+  .container1 {
+    padding: 2px 16px;
+  }
+
+.by{
+    text-align: right;
+    font-family:'Cuprum';
+    font-size: 20px;
+}
+
+#font
+{
+    font-family:'Cuprum';
+    font-size: 20px;
+}
+tr{
+    box-shadow: 0 10px 20px 0 rgba(0,0,0);
+}
+.title-arch {
+    text-align: center;
+    margin: 50px 0;
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.project {
+width: 100%;
+height: 500px;
+background-size: cover;
+background-position: center;
+padding: 0 !important;
+float:left;
+}
+.project-hover {
+width: 100%;
+height: 100%;
+color: #fff;
+opacity: 0;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
+background-color: rgba(186, 232, 2, 0.7);
+padding: 40% 30px !important;
+}
+
+.project-hover hr {
+height: 30px;
+width: 0;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
+background-color: rgba(255, 255, 255, 1);
+border: 0;
+}
+
+.project-hover a {
+color: rgba(255, 255, 255, 1);
+padding: 2px 22px;
+line-height: 40px;
+border: 2px solid rgba(255, 255, 255, 1);
+-webkit-transition: all 0.5s ease-in-out;
+-moz-transition: all 0.5s ease-in-out;
+-o-transition: all 0.5s ease-in-out;
+transition: all 0.5s ease-in-out;
+}
+
+.project-hover a:hover {
+border-color: rgba(51, 51, 51, 1);
+color: rgba(51, 51, 51, 1);
+background-color: #FFF;
+}
+
+.project:hover .project-hover {
+opacity: 1;
+}
+
+.project:hover .project-hover hr {
+width: 100%;
+height: 5px;
+}
+
+#api
+{
+    padding-left: 30%;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0);
+
+}
+
+#key
+{
+    size: 10px;
+}
+
+.card2
+{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0);
+    transition: 0.3s;
+    width: 70%;
+}

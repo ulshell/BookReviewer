@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block body %}
+{% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-success border text-center" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+<div id="pad">
+<form class="form-inline" action="/search" method="post">
+    <div id="inputFields" style="background-image: url('static/pexels-photo-1060417.jpg')">
+        <h1 class="h3 mb-3 font-weight-normal" style="color: #ffffff; font-family:'Cuprum';">Enter Book Details</h1>
+        <label for="detail" style="color: #ffffff; font-family:'Cuprum';">ISBN</label>
+        <input type="text" id="detail" name="isbn" class="form-control" placeholder="ISBN" autofocus="">
+        <label for="detail" style="color: #ffffff; font-family:'Cuprum';">Title</label>
+        <input type="text" id="detail" name="title" class="form-control" placeholder="Title" autofocus="">
+        <label for="detail" style="color: #ffffff; font-family:'Cuprum';">Author</label>
+        <input type="text" id="detail" name="author" class="form-control" placeholder="Author" autofocus="">
+        <button class="btn btn-outline-primary" id="submit" type="submit" style="color: #ffffff; font-family:'Cuprum';">Search</button>
+    </div>
+</form>
+</div>
+{% endblock %}

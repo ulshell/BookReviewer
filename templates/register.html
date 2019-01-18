@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<div id="pad">
+        <form class="form-signup" action="/register" method="post">
+            <div id="inputFields" style="background-image: url('static/pexels-photo-1060417.jpg')">
+                <label for="inputUsername" id="inputUsername" style="font-size: 30px; color: #ffffff; font-family:'Cuprum';">Account Register</label>
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="username" id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+                <label for="inputmidPassword" class="sr-only">Password</label>
+                <input type="password" id="inputmidPassword" name="password" class="form-control" placeholder="Password" required="">
+                <label for="inputPassword" class="sr-only">Confirm Password</label>
+                <input type="password" id="inputPassword" name="confirmpassword" class="form-control" placeholder="Confirm Password" required="">
+                </br>
+                <button class="btn btn-outline-primary" id="submit" type="submit" style="color: #ffffff; font-family:'Cuprum';">Sign up</button>
+            </div>
+        </form>
+</div>
+{% endblock %}

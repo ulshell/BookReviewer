@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+API
+{% endblock %}
+{% block body %}
+{% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-primary border text-center" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+{% if api%}
+<div class="card2">
+    <div class="container1" style="background-image: url('static/download.jpg');color:#ffffff;">      
+        <p id="font">Your API KEY is {{ api }}</p>
+        <p id="font"> You can access key from url/API/your_api_key/book_isbn_no</p>
+    </div>
+</div>
+{% else %}
+<div id="api">
+    
+	<div class="col-xl-6 col-sm-4 project wow animated animated4 fadeInLeft" style="background-image: url('static/Screen Shot 2019-01-13 at 7.22.06 PM.png')">
+        <div class="project-hover">
+        	<h2>Get Your Key</h2>
+            <hr/>
+            <p>Read the instructions before proceeding further</p>
+            <form class="form-signin" action="/api" method="post">
+                <button class="btn btn-outline-primary" id="key" type="submit" style="color: #ffffff; font-family:'Cuprum';">Your Key</button>
+            </form>
+        </div>
+    </div>
+<div class="clearfix"></div>
+</div>
+{% endif %}
+{% endblock %}

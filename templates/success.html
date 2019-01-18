@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Success
+{% endblock %}
+
+{% block body %}
+{% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-success border text-center" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+<div id="pad">
+<form action="/get_info" method="post">
+    <div id="inputFields" style="background-image: url('static/pexels-photo-1060417.jpg');font-family:'Cuprum';">
+    <h2> Thank you for reviewing Book {{isbn}} </h2>
+    <input class="form-control form-control-lg" name="isbn" type="hidden" placeholder=".form-control-lg" value={{isbn}}>
+    <p> Press button to go back </p> 
+    <button type="submit" class="btn btn-success">Back</button>
+    <div>
+</form>
+</div>
+{% endblock %}

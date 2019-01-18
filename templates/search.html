@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block body %}
+{% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-success border text-center" role="alert">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+{% endif %}
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">ISBN</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+        </tr>
+    </thead>
+    {% for row in list %}
+        <tr>
+            <th scope="col">{{ row[0] }}</th>
+            <th scope="col">{{ row[1] }}</th>
+            <th scope="col">{{ row[2] }}</th>
+        </tr>
+    {% endfor %}
+</table>
+<form  action="/get_info" method="post">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1" style="color: #ffffff;">Choose Options to get information for</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="isbn">
+        {% for row in list %}
+            <option style="color: #ffffff;">{{row[0]}}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <button class="btn btn-info" id="find" type="submit" style="color: #ffffff; font-family:'Cuprum';">Find</button>
+</form>
+{% endblock %}
