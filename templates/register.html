@@ -6,7 +6,7 @@ Register
 
 {% block body %}
 <div id="pad">
-        <form class="form-signup" action="/register" method="post">
+        <form class="form-signup" action=""{{ url_for('register') }}"" method="post">
             <div id="inputFields" style="background-image: url('static/pexels-photo-1060417.jpg')">
                 <label for="inputUsername" id="inputUsername" style="font-size: 30px; color: #ffffff; font-family:'Cuprum';">Account Register</label>
                 <label for="inputUsername" class="sr-only">Username</label>

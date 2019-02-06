@@ -13,7 +13,7 @@ login
     </header>
 {% endif %}
 <div id="pad">
-    <form class="form-signin" action="/login" method="post">
+    <form class="form-signin" action="{{ url_for('login') }}" method="post">
 		<div id="inputFields" style="background-image: url('static/pexels-photo-1060417.jpg')">
             <label for="inputUsername" id="inputUsername" style="font-size: 30px; color: #ffffff; font-family:'Cuprum';">Account Login</label>
             <label for="inputUsername" class="sr-only">Username</label>
