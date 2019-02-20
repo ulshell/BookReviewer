@@ -1,23 +1,27 @@
 #inputUsername
 {
-    width: 320px;
+    width: 100%;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
+.navbarTogglerDemo03{
+    padding-left: 10%;
+}
+
 #inputPassword
 {
-    width: 320px;
+    width: 100%;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
 }
 #inputmidPassword
 {
-    width: 320px;
+    width: 100%;
     border-radius: 0px;
 }
 #submit
 {
-    width: 320px;
+    width: 100%;
 }
 #inputFields
 {
@@ -54,7 +58,7 @@
 #Select
 {
     width: 100px;
-    
+
 }
 #error
 {
@@ -133,11 +137,11 @@ table{
     transition: 0.3s;
     width: 40%;
 }
-  
+
   .card:hover {
     box-shadow: 0 10px 20px 0 rgba(0,0,0);
   }
-  
+
   .container1 {
     padding: 2px 16px;
   }
