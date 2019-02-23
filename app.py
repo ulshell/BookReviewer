@@ -1,6 +1,8 @@
 import hashlib
 import os
 from tempfile import mkdtemp
+import os
+import psycopg2
 
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -11,8 +13,10 @@ from helpers import login_required
 
 app = Flask(__name__)
 
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cur = conn.cursor()
 
 @app.after_request
 def after_request(response):
@@ -27,11 +31,6 @@ app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
-# Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
-db = scoped_session(sessionmaker(bind=engine))
-
 
 @app.route("/")
 @login_required
@@ -51,7 +50,9 @@ def login():
         elif password == "":
             return render_template("error.html", message="Password field is empty")
         try:
-            password_db = db.execute("SELECT password from BOOK WHERE username = :username", {"username": username}).fetchall()[0][0]
+            cur.execute("SELECT password from BOOK WHERE username = username")
+            password_db = cur.fetchone()[0]
+            #password_db = db.execute("SELECT password from BOOK WHERE username = :username", {"username": username}).fetchall()[0][0]
         except:
             return render_template("error.html", message="Invaild User")
         if password_db is None:
@@ -83,8 +84,8 @@ def register():
 
             encrypted_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
             try:
-                db.execute("INSERT INTO BOOK(username, password) VALUES(:username, :password)", {"username": username, "password": encrypted_password})
-                db.commit()
+                cur.execute("INSERT INTO BOOK(username, password) VALUES(%s, %s)", (username, encrypted_password))
+                conn.commit()
             except:
                 return render_template("error.html", message="Error username already exists choose another and try again")
                 #raise Exception("Error username already exists choose another and try again")
@@ -123,19 +124,27 @@ def search():
 def get_info():
     if request.method == "POST":
         isbn = request.form.get("isbn")
-        print(isbn)
+        #print(isbn)
         obj = detail(isbn=isbn)
         res = obj.search(isbn=isbn)
         result = obj.get_info(isbn=isbn)
-        unique_username = db.execute("SELECT username FROM REVIEW WHERE isbn=:intisbn", {"intisbn": isbn}).fetchall()
+        cur.execute("SELECT username FROM REVIEW WHERE isbn=isbn")
+        unique_username = cur.fetchone()
+        print(unique_username)
         new_username = []
-        for i in unique_username:
-            new_username.append(i[0])
+        if unique_username:
+
+            for i in unique_username:
+                new_username.append(i[0])
+        else:
+            new_username = []
         if session['username'] not in new_username:
-            reviews = db.execute("SELECT review, ratings, username FROM REVIEW WHERE isbn=:intisbn", {"intisbn": isbn}).fetchall()
+            cur.execute("SELECT review, ratings, username FROM REVIEW WHERE isbn=isbn")
+            reviews = list(cur.fetchone())
             return render_template("get_info.html", isbn = res[0][0], title = res[0][1], author = res[0][2], year = res[0][3], review=reviews, check="1", review_count=result["review_count"], average_rating=result["average_score"])
         else:
-            reviews = db.execute("SELECT review, ratings , username FROM REVIEW WHERE isbn=:intisbn", {"intisbn": isbn}).fetchall()
+            cur.execute("SELECT review, ratings , username FROM REVIEW WHERE isbn=isbn")
+            reviews = cur.fetchone()
             return render_template("get_info.html", isbn = res[0][0], title = res[0][1], author = res[0][2], year = res[0][3], review = reviews, check="", review_count=result["review_count"], average_rating=result["average_score"])
     else:
         return render_template("get_info.html")
@@ -149,8 +158,8 @@ def review_insert(isbn):
         if ratings == "Ratings":
             ratings = 0
         ratings = int(ratings)
-        db.execute("INSERT INTO REVIEW(username, isbn, review, ratings) VALUES(:username, :isbn, :review, :ratings)", {"username": session["username"],"isbn": isbn, "review": review, "ratings": ratings})
-        db.commit()
+        cur.execute("INSERT INTO REVIEW(username, isbn, review, ratings) VALUES(%s, %s, %s, %s)", (session["username"], isbn, review, ratings))
+        conn.commit()
         flash('Review Inserted Successfully')
         return render_template("success.html", isbn=isbn)
     else:
@@ -158,16 +167,18 @@ def review_insert(isbn):
 
 @app.route("/API/<api>/<isbn>")
 def api1(isbn, api):
-    test_api = db.execute("SELECT username FROM API WHERE api=:api", {"api": api}).fetchall()
+    cur.execute("SELECT username FROM API WHERE api=api")
+    test_api = cur.fetchone()
     if test_api:
-        count = db.execute("SELECT count FROM API WHERE api=:api", {"api": api}).fetchall()
+        cur.execute("SELECT count FROM API WHERE api=api")
+        count = cur.fetchone()
         c = 0
         if count[0][0] >= 100:
             return render_template("error.html", message="You have reached your access limit")
         else:
             c = count[0][0] + 1
-        db.execute("UPDATE API SET count = :count WHERE api = :api", {"count": c, "api": api})
-        db.commit()
+        cur.execute("UPDATE API SET count = c WHERE api = api")
+        conn.commit()
         obj = detail(isbn=isbn)
         res = obj.get_info(isbn=isbn)
         result = obj.search(isbn=isbn)
@@ -182,12 +193,14 @@ def api1(isbn, api):
 @login_required
 def api():
     if request.method == "POST":
-        api = db.execute("SELECT api FROM API WHERE username=:username", {"username": session['username']}).fetchall()
+        username = session["username"]
+        cur.execute("SELECT api FROM API WHERE username=username")
+        api = cur.fetchone()
         if api:
             return render_template('api.html', api=api[0][0])
         api = hashlib.sha256(session['username'].encode('utf-8')).hexdigest()
-        db.execute("INSERT INTO API(username, api, count) VALUES(:username, :api, :count)", {"username": session['username'], "api": api, "count": 0})
-        db.commit()
+        cur.execute("INSERT INTO API(username, api, count) VALUES(%s, %s, %s)", (session["username"], api, 0))
+        conn.commit()
         return render_template('api.html', api=api)
     else:
         flash('Welcome To API Key registration')
