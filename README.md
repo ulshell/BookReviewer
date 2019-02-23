@@ -15,34 +15,11 @@ A web application for searching books with their isbn number, name or author of 
 
 ## User's Home Page
 
->Home page of user for searching different scree_names of twitter account that are not private.
+>Home page of to search for books.
 
 ![alt home](https://github.com/ulshell/BookReviewer/blob/master/static/Index.png)
 
-## Tweet Analysis Page
+## API
+>API in form of json
 
->Page describing whole analysis of atmost 200 recent tweets (positive , negative or neutral)
-
-![alt analysis](https://github.com/ulshell/BookReviewer/blob/master/static/analysis.png)
-
-# How to run :-
-
->For installing all required python3 libraries
-
-->$ pip3 install --user -r requirements.txt
-
->Goto your Twitter account create an app and get API_KEY and API_SECRET to run app.
-
--> $export API_KEY=your api key
-
--> $export API_SECRET=your api secret key
-
->Provide the FLASK_APP environment variable
-
--> $export FLASK_APP=application.py
-
->Run Flask Application
-
--> $python3 -m flask run
-
->Open http link provided in terminal. 
+![alt home](https://github.com/ulshell/BookReviewer/blob/master/static/json.png)
