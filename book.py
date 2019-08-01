@@ -1,14 +1,15 @@
 import requests
 import csv
 import json
+import os
 class detail:
     def __init__(self, isbn="", title="", author=""):
         self.isbn = isbn
         self.title = title
         self.author = author
-    
+
     def search(self, isbn="", title="", author=""):
-        books = open("/Users/utkarsh-mishra/Desktop/learning/project1/books.csv")
+        books = open(os.getcwd() + "/books.csv")
         file = csv.DictReader(books)
         book = []
         for row in file:
@@ -29,7 +30,3 @@ class detail:
         print(res.json()["books"][0]["id"])
         book_info = {"isbn": str(res.json()["books"][0]["isbn"]), "review_count": str(res.json()["books"][0]["reviews_count"]), "average_score": str(res.json()["books"][0]["average_rating"])}
         return book_info
-    
-    
-    
-

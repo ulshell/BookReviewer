@@ -22,7 +22,7 @@ Search
         </tr>
 </table>
 <div class="card">
-    <div class="container2" style="background-image: url('static/download.jpg');color:#ffffff;">      
+    <div class="container2" style="background-image: url('static/download.jpg');color:#ffffff;">
         <p id="font">Average Rating for this book is {{ average_rating }} / 5</p>
     </div>
 </div>
@@ -32,14 +32,14 @@ Search
     {% for r in review %}
         <div class="card">
             <div class="container1"  style="background-image: url('static/download.jpg');font-family:'Cuprum'; color:#ffffff;">
-                {% for i in range(r[1])%}
+                {% for i in range(r.ratings)%}
                 <span class="fa fa-star checked"></span>
                 {% endfor%}
-                {% for i in range(5 - r[1])%}
+                {% for i in range(5 - r.ratings)%}
                 <span class="fa fa-star"></span>
                 {% endfor %}
-                <p id="font">{{ r[0] }}</p>
-                <p class="by">by {{r[2]}}</p>
+                <p id="font">{{ r.review }}</p>
+                <p class="by">by {{r.username}}</p>
             </div>
         </div>
         </br>
@@ -50,7 +50,7 @@ Search
     <div>
         <textarea placeholder="Write your reviews" name="review" id="text"></textarea>
     </div>
-    <div style="background-color: #000000; font-family:'Cuprum';">  
+    <div style="background-color: #000000; font-family:'Cuprum';">
         <select class="form-control-sm" id="Select" name="Select">
             <option>Ratings</option>
             <option>1</option>
